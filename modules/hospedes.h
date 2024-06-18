@@ -42,6 +42,7 @@ void cadastraCliente() {
     printf("Digite o telefone do cliente: ");
     fgets(telefone, 20, stdin);
     fprintf(clientes, "%s", telefone);
+    printf("\nNovo cliente criado! ID: %d", id);
 
     fclose(clientes);
 

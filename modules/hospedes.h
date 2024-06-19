@@ -3,9 +3,10 @@
 FILE *clientes;
 FILE *numeroClientes;
 
+//Função 1:
 void cadastraCliente() {
     int id;
-    char nome[30], endereço[50], telefone[20];
+    char nome[30], endereco[50], telefone[20];
 
     system("md c:\\temp");
 
@@ -32,8 +33,8 @@ void cadastraCliente() {
     fgets(nome, 30, stdin);
     fprintf(clientes, "%s", nome);
     printf("Digite o endereco do cliente: ");
-    fgets(endereço, 50, stdin);
-    fprintf(clientes, "%s", endereço);
+    fgets(endereco, 50, stdin);
+    fprintf(clientes, "%s", endereco);
     printf("Digite o telefone do cliente: ");
     fgets(telefone, 20, stdin);
     fprintf(clientes, "%s", telefone);
@@ -42,5 +43,48 @@ void cadastraCliente() {
     fclose(clientes);
 
 }
+
+
+//Função 7:
+
+void pesquisaCliente() {
+    char nome[30], nomeCliente[30], endereco[50], telefone[20];
+    int id, encontrado = 0;
+
+    printf("Digite o nome do cliente: ");
+    scanf("%s", nome);
+
+    clientes = fopen("c:/temp/clientes.txt", "r");
+    if(clientes == NULL) {
+        printf("Nenhum cliente cadastrado.\n");
+        return;
+    }
+
+    while(fscanf(clientes, "%d\n", &id) != EOF) {
+        fgets(nomeCliente, 30, clientes);
+        nomeCliente[strcspn(nomeCliente, "\n")] = 0;
+        fgets(endereco, 50, clientes);
+        endereco[strcspn(endereco, "\n")] = 0;
+        fgets(telefone, 20, clientes);
+        telefone[strcspn(telefone, "\n")] = 0;
+
+        if(strcmp(nomeCliente, nome) == 0) {
+            printf("Cliente encontrado!\n");
+            printf("ID: %d\n", id);
+            printf("Nome: %s\n", nomeCliente);
+            printf("Endereço: %s\n", endereco);
+            printf("Telefone: %s\n", telefone);
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Nome não encontrado!\n");
+    }
+
+    fclose(clientes);
+}
+
 
 #endif

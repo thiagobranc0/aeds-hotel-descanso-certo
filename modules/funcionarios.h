@@ -3,9 +3,10 @@
 FILE *funcionarios;
 FILE *numeroFuncionarios;
 
+//Função 2:
 void cadastraFuncionario() {
     int id;
-    char nome[30], endereço[50], telefone[20], cargo[20];
+    char nome[30], endereco[50], telefone[20], cargo[20];
     float salario;
 
     system("md c:\\temp");
@@ -33,8 +34,8 @@ void cadastraFuncionario() {
     fgets(nome, 30, stdin);
     fprintf(funcionarios, "%s", nome);
     printf("Digite o endereco do funcionario: ");
-    fgets(endereço, 50, stdin);
-    fprintf(funcionarios, "%s", endereço);
+    fgets(endereco, 50, stdin);
+    fprintf(funcionarios, "%s", endereco);
     printf("Digite o telefone do funcionario: ");
     fgets(telefone, 20, stdin);
     fprintf(funcionarios, "%s", telefone);
@@ -49,5 +50,7 @@ void cadastraFuncionario() {
     fclose(funcionarios);
 
 }
+
+
 
 #endif

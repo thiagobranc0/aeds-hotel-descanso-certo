@@ -6,11 +6,7 @@
 #include "./modules/quartos.h"
 
 int main(void) {
-    
-    cadastraQuarto();
-    // cadastraCliente();
-    // cadastraFuncionario();
-    
+    EstadiasCliente();
 
     return 0;
 }

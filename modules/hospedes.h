@@ -2,10 +2,6 @@
 #define BIB1_H_INCLUDED
 FILE *clientes;
 FILE *numeroClientes;
-FILE *funcionarios;
-FILE *numeroFuncionarios;
-FILE *quartos;
-FILE *numeroQuartos;
 
 void cadastraCliente() {
     int id;
@@ -16,7 +12,6 @@ void cadastraCliente() {
     numeroClientes = fopen("c:/temp/numeroClientes.txt", "r");
     if(numeroClientes == NULL) {
         numeroClientes = fopen("c:/temp/numeroClientes.txt", "w");
-        fprintf(numeroClientes, "%d", 1);
         fclose(numeroClientes);
         id = 0;
     } else {

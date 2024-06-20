@@ -7,6 +7,6 @@
 
 int main(void) {
     EstadiasCliente();
-
+console.log('batata');
     return 0;
 }

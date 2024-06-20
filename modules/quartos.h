@@ -208,7 +208,7 @@ void registraEstadia()
 
 void salvaEstadia(int client_id, int quarto_id, int pessoas, struct tm check_in, struct tm check_out, int dias)
 {
-    estadias = fopen("c:/temp/estadias.txt", "a");
+    estadias = fopen("c:/temp/numeroQuartos.txt", "a");
     if (estadias == NULL)
     {
         printf("Erro ao abrir o arquivo de estadias.\n");
@@ -236,38 +236,54 @@ typedef struct {
     int check_out_day;
     int check_out_month;
     int check_out_year;
-    int days;
+    int dias;
+    int campo_de_erro;  
 } Estadia;
 
 void EstadiasCliente() {
     int cliente_id;
-    
+
     printf("Digite o código do cliente: ");
-    scanf("%d", &cliente_id);
-    
-    estadias = fopen("c:/temp/estadias.txt", "r");
+    scanf("%d",&cliente_id);
+
+    FILE *estadias = fopen("c:/temp/estadias.txt", "r");
     if (estadias == NULL) {
         printf("Erro ao abrir o arquivo de estadias.\n");
         return;
     }
 
     Estadia estadia;
+    int encontrar = 0;
 
-    while (fscanf(estadias, "%d %d %d %d %d %d %d %d %d %d %d",
-                  &estadia.client_id, &estadia.quarto_id, &estadia.pessoas,
-                  &estadia.check_in_day, &estadia.check_in_month, &estadia.check_in_year,
-                  &estadia.check_out_day, &estadia.check_out_month, &estadia.check_out_year,
-                  &estadia.days) == 11) {
-        
+    while (1) {
+        int result = fscanf(estadias, "%d %d %d %d %d %d %d %d %d %d %d",
+                            &estadia.client_id, &estadia.quarto_id, &estadia.pessoas,
+                            &estadia.check_in_day, &estadia.check_in_month, &estadia.check_in_year,
+                            &estadia.check_out_day, &estadia.check_out_month, &estadia.check_out_year,
+                            &estadia.dias, &estadia.campo_de_erro);  
+
+        if (result == EOF) {
+            break;  
+        } else if (result != 11) {
+            printf("Erro ao ler os dados da estadia, apenas %d valores lidos.\n", result);
+            break;  
+        }
+
+
         if (estadia.client_id == cliente_id) {
             printf("Cliente: %d\n", estadia.client_id);
             printf("Quarto: %d\n", estadia.quarto_id);
             printf("Hóspedes: %d\n", estadia.pessoas);
             printf("Data de entrada: %d/%d/%d\n", estadia.check_in_day, estadia.check_in_month, estadia.check_in_year);
             printf("Data de saída: %d/%d/%d\n", estadia.check_out_day, estadia.check_out_month, estadia.check_out_year);
-            printf("Diárias: %d\n", estadia.days);
+            printf("Diárias: %d\n", estadia.dias);
             printf("\n");
+            encontrar = 1;
         }
+    }
+
+    if (!encontrar) {
+        printf("Nenhuma estadia encontrada para o cliente %d.\n", cliente_id);
     }
 
     fclose(estadias);

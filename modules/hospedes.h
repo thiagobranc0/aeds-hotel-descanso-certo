@@ -45,7 +45,7 @@ void cadastraCliente() {
 }
 
 
-//Função 7:
+//Função 6:
 
 void pesquisaCliente() {
     char nome[30], nomeCliente[30], endereco[50], telefone[20];
